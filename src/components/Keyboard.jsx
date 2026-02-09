@@ -5,18 +5,26 @@ const keyboardrows =
         ["ENTER", "Z", "C", "V", "B", "N", "M", "Ö", "Ç", "⌫"]
     ];
 
-function Keyboard({onKeyDown}) {
+function Keyboard({onKeyDown, keyColors}) {
     return (
         <div className="flex flex-col gap-2 mt-7">
             {keyboardrows.map((row, i) => (
-            <div key={i} className="flex justify-center gap-1">
-                {row.map((key) => (
-                    <button key={key}
-                            onClick={() => onKeyDown(key)}
-                            className="h-12 rounded font-bold">{key}
-                    </button>
-                ))}
-            </div>
+                <div key={i} className="flex justify-center gap-1">
+                    {row.map((key) => (
+                        <button key={key}
+                                onClick={() => onKeyDown(key)}
+                                className={` rounded font-bold flex items-center justify-center
+                                ${i === 1 ? "w-12 h-19 text-sm" : "w-15 h-19"}
+                                ${keyColors[key] === "black" ? "bg-black text-white" : ""}
+                                ${!keyColors[key] ? "bg-gray-400 text-white" : ""}
+                               
+                                `}
+                        >
+
+                            {key}
+                        </button>
+                    ))}
+                </div>
             ))}
         </div>
     );
